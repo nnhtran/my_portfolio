@@ -1,4 +1,4 @@
-import ky from 'ky'
+// import ky from 'ky'
 import { type NextApiRequest, type NextApiResponse } from 'next'
 import { ImageResponse } from 'next/og'
 import { type PageBlock } from 'notion-types'
@@ -17,13 +17,16 @@ import { mapImageUrl } from '@/lib/map-image-url'
 import { notion } from '@/lib/notion-api'
 import { type NotionPageInfo, type PageError } from '@/lib/types'
 
-export const runtime = 'edge'
+// export const runtime = 'edge'
+export const runtime = 'nodejs'
 
 export default async function OGImage(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { searchParams } = new URL(req.url!)
+  const protocol = req.headers['x-forwarded-proto'] || 'http'
+  const host = req.headers.host
+  const { searchParams } = new URL(req.url!, `${protocol}://${host}`)
   const pageId = parsePageId(
     searchParams.get('id') || libConfig.rootNotionPageId
   )
@@ -277,8 +280,8 @@ async function isUrlReachable(
   }
 
   try {
-    await ky.head(url)
-    return true
+    const res = await fetch(url, { method: 'HEAD' })
+    return res.ok
   } catch {
     return false
   }
