@@ -207,6 +207,11 @@ export function NotionPage({
   error,
   pageId
 }: types.PageProps) {
+  const [hasMounted, setHasMounted] = React.useState(false)
+  React.useEffect(() => {
+    setHasMounted(true)
+  }, [])
+
   const router = useRouter()
   const lite = useSearchParam('lite')
 
@@ -253,6 +258,10 @@ export function NotionPage({
     return <Page404 site={site} pageId={pageId} error={error} />
   }
 
+  if (!hasMounted) {
+    return null
+  }
+
   const title = getBlockTitle(block, recordMap) || site.name
 
   console.log('notion page', {
@@ -277,8 +286,8 @@ export function NotionPage({
 
   const socialImage = mapImageUrl(
     getPageProperty<string>('Social Image', block, recordMap) ||
-      (block as PageBlock).format?.page_cover ||
-      config.defaultPageCover,
+    (block as PageBlock).format?.page_cover ||
+    config.defaultPageCover,
     block
   )
 
