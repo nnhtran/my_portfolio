@@ -2,7 +2,7 @@ import { siteConfig } from './lib/site-config'
 
 export default siteConfig({
   // the site's root Notion page (required)
-  rootNotionPageId: 'a225c6adacec821ca4028121e3f1ecb0',
+  rootNotionPageId: '1fbf3298e90483de859a0136d08d4fe0',
 
   // if you want to restrict pages to a single notion workspace (optional)
   // (this should be a Notion ID; see the docs for how to extract this)
@@ -17,7 +17,7 @@ export default siteConfig({
   description: 'Tran Nguyen Portfolio',
 
   // social usernames (optional)
-  github: 'ducduy9304',
+  github: 'nnhtran',
   linkedin: 'tranngngochuyen',
   // mastodon: '#', // optional mastodon profile URL, provides link verification
   // newsletter: '#', // optional newsletter URL
