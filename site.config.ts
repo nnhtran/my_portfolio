@@ -17,7 +17,7 @@ export default siteConfig({
   description: 'Tran Nguyen Portfolio',
 
   // social usernames (optional)
-  github: 'nnhtran',
+  // github: 'nnhtran', // removed: hide GitHub social link
   linkedin: 'tranngngochuyen',
   // mastodon: '#', // optional mastodon profile URL, provides link verification
   // newsletter: '#', // optional newsletter URL
